@@ -3,9 +3,14 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>今昔函館巡り</title>
+    <title>今昔箱館巡り</title>
     <link rel="stylesheet" type="text/css" href="index.css">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://code.jquery.com/jquery-1.6.1.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="mosaic.1.0.1.js"></script>
+	<link rel="stylesheet" href="mosaic.css" type="text/css" media="screen" />
+
     <script>
 // This example uses a GroundOverlay to place an image on the map
 // showing an antique map of Newark, NJ.
@@ -35,14 +40,43 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
+
+
+
+
     </script>
+
+ 
+<script type="text/javascript">
+jQuery(function($){
+  $('.bar2').mosaic({
+    animation : 'slide',
+  });
+});
+</script>
   </head>
-<body id=main-wrapper>
+<body id="main-wrapper">
   	<header>
+  		<h1>今昔箱館巡り</h1>
   	</header>
   	<nav>
+  		<ul id="menu">
+  			<li><a href="#">トップページ</a></li>
+  			<li><a href="#">函館どつくの今昔巡り</a></li>
+  			<li><a href="#">五稜郭の今昔巡り</a></li>
+  		</ul>
   	</nav>
   	<article>
+  		<div class="mosaic-block bar2">
+		<a href="#" target="_blank" class="mosaic-overlay">
+		<div class="details"><h4>タイトル</h4><p>キャプション内容</p></div>
+		</a>
+		<div class="mosaic-backdrop"><img src="1855.png" /></div>
+		</div>
+
+  		<section>
+  			
+  		</section>
   		
   	</article>
   	<footer>
