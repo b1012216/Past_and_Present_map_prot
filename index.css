@@ -3,13 +3,22 @@ body {
 	margin: 0px auto;
 }
 
+/*
+ヘッダー
+*/
+
 header {
 	height: 75px;
 	width: 1024px;
 }
 
-h1 {
+h1, h2 {
 	font-size: 50px;
+	font-family: "ヒラギノ明朝 Pro","Hiragino Mincho Pro";
+}
+
+ h2 {
+ 		font-size: 25px;
 	font-family: "ヒラギノ明朝 Pro","Hiragino Mincho Pro";
 }
 
