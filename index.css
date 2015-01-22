@@ -22,6 +22,13 @@ h1, h2 {
 	font-family: "ヒラギノ明朝 Pro","Hiragino Mincho Pro";
 }
 
+
+a {
+color: white;
+text-decoration: none;
+}
+
+
 #map-canvas {
     height: 800px;
     width: 1000px;
