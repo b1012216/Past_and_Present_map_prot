@@ -1,0 +1,127 @@
+﻿<html>
+  <head>
+    <meta name="copyright" content="(c) 2013 kazu.">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+    <script src="js_gsv.js" type="text/javascript"></script>
+    <title>タイトル</title> 
+    <style type="text/css">  
+        <!-- 
+        body {  
+            height: 100%;
+            float: left;
+        }
+        #streetview_canvas {
+             float: left;
+            margin: 0;
+            width: 500px;
+            height: 500px;
+        }
+        --> 
+
+        #map-canvas {
+             float: left;
+    float: left;
+    height: 500px;
+    width: 500px;
+     border: 1px solid #000000;
+ padding: 5px;
+ margin: 0px 0px 10px 0px;
+
+} 
+
+    </style>  
+
+            <script>
+// This example uses a GroundOverlay to place an image on the map
+// showing an antique map of Newark, NJ.
+
+var map;
+var old_map
+
+function initialize() {
+  var mapOptions = {
+    zoom: 13,
+    //center: new google.maps.LatLng(-34.397, 150.644),
+    // 緯度・経度（東京駅）
+    center: new google.maps.LatLng(41.796604, 140.757159),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+}
+
+
+var historicalOverlay;
+
+function initialize_old() {
+
+  var newark = new google.maps.LatLng(41.796604, 140.757159);
+  var imageBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(41.738346, 140.648712),
+      new google.maps.LatLng(41.806071, 140.821918));
+
+  var mapOptions = {
+    zoom: 13,
+    center: newark
+  };
+
+  old_map = new google.maps.Map(document.getElementById('map-canvas-old'),
+      mapOptions);
+
+  historicalOverlay = new google.maps.GroundOverlay(
+      'https://box.c.yimg.jp/res/box-s-wkyzuoxwkmgqengekjkfhah6b4-1001?uid=0bc07262-214e-4e62-a9cd-0a0a0c3e8d8e&etag=b515957514187164721682985',
+      imageBounds);
+  historicalOverlay.setMap(old_map);
+}
+
+
+    function init() {
+      var opts = {
+        zoom: 12,
+        mapTypeId: "GsiMaps", // 地理院地図の英語表記は「GIS Maps」
+        center: new google.maps.LatLng(41.796604, 140.757159)
+      };
+
+      var map = new google.maps.Map(document.getElementById("map-canvas-old"), opts);
+
+      map.setOptions({
+        mapTypeControl: false // 右上の地図タイプ選択を消す
+      });
+
+      // 地理院タイルを Overlay する
+      // via http://portal.cyberjapan.jp/help/development.html
+      map.mapTypes.set("GsiMaps", {
+        name:"地理院地図(GSI Maps)",
+        tileSize:new google.maps.Size(256,256),
+        minZoom:5,
+        maxZoom:18, 
+        getTile:function(tileCoord, zoom, ownerDocument) {
+          var img = ownerDocument.createElement("img");
+          img.style.width = "256px";
+          img.style.height = "256px";
+          var x = (tileCoord.x % Math.pow(2, zoom)).toString();
+          var y = tileCoord.y.toString();
+          img.src = "http://cyberjapandata.gsi.go.jp/xyz/gazo1/" + zoom +  "/" + x + "/" + y + ".jpg";
+          return img;
+        }
+      });
+
+       // 左下に電子国土ロゴを表示(TODO: 地理院地図の正式なロゴが公開されたら置き換える)
+      var logo = document.createElement('DIV');
+      logo.style.padding = '3px';
+      map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(logo);
+      logo.innerHTML = '<a href="http://portal.cyberjapan.jp/portalsite/kiyaku/index.html" target="_blank"><img style="width:32px, height:32px" src="http://cyberjapan.jp/images/icon01.gif" alt="電子国土" /></a>';    }
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', init);
+
+    </script>
+
+  </head>
+  <body>
+    <div id="streetview_canvas"></div>
+    <div id="map-canvas"></div>
+  </body>
+</html>
